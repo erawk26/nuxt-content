@@ -1,0 +1,41 @@
+@import 'variables';
+.v-application {
+  .mdi,
+  .material-icons,.mdi {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+  font-family: $body-font-family !important;
+  .display-1,
+  .display-2,
+  .display-3,
+  .display-4,
+  .headline,
+  .title,
+  .subtitle-1,
+  .subtitle-2 {
+    font-family: $heading-font-family !important;
+  }
+  .body-1,
+  .body-2,
+  .caption,
+  .overline {
+    font-family: $body-font-family !important;
+  }
+  [class^='nav-'] {
+    font-family: $heading-font-family;
+    flex: unset;
+  }
+}
+@import '~vuetify/src/styles/styles.sass';

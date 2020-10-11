@@ -8,17 +8,21 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
     "lint": "yarn lint:js",
     "test": "jest"
   },
   "dependencies": {
     "@nuxt/content": "^1.9.0",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "vue-star-rating": "^1.7.0",
+    "vue-youtube-embed": "^2.2.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/style-resources": "^1.0.0",
     "@nuxtjs/vuetify": "^1.11.2",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",
@@ -29,7 +33,12 @@
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.5.0",
+    "node-sass": "^4.14.1",
     "prettier": "^2.1.2",
-    "vue-jest": "^3.0.4"
+    "pug": "^3.0.0",
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^7.3.1",
+    "vue-jest": "^3.0.4",
+    "vue-svg-loader": "^0.16.0"
   }
 }

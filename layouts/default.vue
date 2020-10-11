@@ -1,91 +1,82 @@
-<template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
-  </v-app>
+<template lang="pug">
+v-app
+  v-app-bar.z-index-100.dont-print(app)
+    component(is='Header')
+  .main-layout.css-grid-2
+    v-main.full-width.px-5.row-1.row-span-1.col-full
+      .max-pg-width
+        nuxt.component-content
+    component.row-2.row-span-1.col-full.dont-print(is='Footer')
 </template>
 
 <script>
 export default {
+  components: {
+    Header: () => import('@/components/Header'),
+    Footer: () => import('@/components/Footer'),
+  },
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
-        },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
+      scrolled: 'top',
     }
+  },
+  computed: {},
+  watch: {},
+  mounted() {
+    window.addEventListener('scroll', this.debounce(this.onScroll, 200))
+  },
+  methods: {
+    childRoute(href) {
+      return this.$route.path.split('/').includes(href.replace('/', ''))
+    },
+    onScroll() {
+      const threshhold = 100
+      if (window.pageYOffset < threshhold) {
+        this.scrolled = 'top'
+      } else if (
+        window.innerHeight + window.pageYOffset + 1 >=
+        document.body.offsetHeight
+      ) {
+        this.scrolled = 'bottom'
+      } else {
+        this.scrolled = 'middle'
+      }
+    },
   },
 }
 </script>
+
+<style lang="scss">
+@import '~/assets/scss/_utility.scss';
+@import '~/assets/scss/_animations.scss';
+@import '~/assets/scss/_global.scss';
+.main-layout {
+  grid-template-rows: 1fr 5.5rem;
+  // @media (max-width: $menu-bp - 1) {
+  //   grid-template-rows: 0px 1fr 13.5rem;
+  // }
+  height: 100%;
+  overflow: hidden;
+}
+.z-index-100 {
+  z-index: 100 !important;
+}
+.scrolled:not(.top) .navigation-drawer {
+  z-index: 100;
+  top: -6rem;
+  left: 0;
+  width: 100%;
+  transform: translateY(4.5rem);
+  position: fixed;
+  transition: all 1s ease;
+}
+// .scrolled:not(.bottom) footer {
+//   z-index: 100;
+//   bottom: -60px;
+//   left: 0;
+//   width: 100%;
+//   transform: translateY(-60px);
+//   position: fixed;
+//   transition: all 1s ease 1s;
+// }
+</style>

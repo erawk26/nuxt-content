@@ -72,6 +72,26 @@
 <script>
 import { format, parseISO } from 'date-fns'
 export default {
+  // return +to.query.page < +from.query.page ? 'slide-up' : 'slide-down'
+  components: {
+    HeadshotSvg: () => import('~/assets/img/headshot.svg'),
+    MyMenu: () => import('~/components/Menu.vue'),
+    MyLink: () => import('~/components/Link.vue'),
+  },
+  data() {
+    return {
+      meta: { title: '', desc: '' },
+      page: null,
+      resume: this.$store.state.siteInfo.resume,
+    }
+  },
+  computed: {},
+  methods: {
+    formatDate: (str) =>
+      str !== 'Present'
+        ? format(parseISO(str + 'T00:00:30'), `LLL yy`).replace(' ', " '")
+        : str,
+  },
   head() {
     return {
       title: `EO Portfolio | ${this.meta.title}`,
@@ -91,27 +111,7 @@ export default {
       ],
     }
   },
-  // return +to.query.page < +from.query.page ? 'slide-up' : 'slide-down'
-  components: {
-    HeadshotSvg: () => import('~/assets/img/headshot.svg'),
-    MyMenu: () => import('~/components/Menu.vue'),
-    MyLink: () => import('~/components/Link.vue'),
-  },
-  data() {
-    return {
-      meta: { title: '', desc: '' },
-      page: null,
-      resume: this.$store.state.siteInfo.resume,
-    }
-  },
   transition: 'slide-down',
-  computed: {},
-  methods: {
-    formatDate: (str) =>
-      str !== 'Present'
-        ? format(parseISO(str + 'T00:00:30'), `LLL yy`).replace(' ', " '")
-        : str,
-  },
 }
 </script>
 

@@ -99,6 +99,7 @@ export default {
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    transpile: ['gsap'],
     extend: (config) => {
       const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
 

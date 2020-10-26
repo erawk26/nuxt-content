@@ -1,5 +1,10 @@
 /* eslint-disable no-console */
 import Vue from 'vue'
+import gsap from 'gsap'
+import ScrollT from 'gsap/ScrollTrigger'
+if (process.client) {
+  gsap.registerPlugin(ScrollT)
+}
 Vue.directive('hover', {
   bind(el, binding, vNode) {
     // Provided expression must evaluate to an object.
@@ -31,5 +36,39 @@ Vue.directive('hover', {
     el.removeEventListener('mouseleave', el.__vHoverLeave__)
     delete el.__vHoverOver__
     delete el.__vHoverLeave__
+  },
+})
+Vue.directive('scrolltrigger', {
+  bind(el, binding, vNode) {
+    // Provided expression must evaluate to an object.
+    const compName = vNode.context.name
+    if (typeof binding.value !== 'object') {
+      let warn = `[v-scrolltrigger]: provided expression '${binding.expression}' is not an object, but it needs to be.`
+      if (compName) {
+        warn += `\nFound in component '${compName}'`
+      }
+      console.warn(warn)
+    }
+    if (!binding.value.tween) {
+      let warn = `[v-scrolltrigger]: object provided does not have 'tween' property. Needs tween() to be of use`
+      if (compName) {
+        warn += `\nFound in component '${compName}'`
+      }
+      console.warn(warn)
+    }
+    const tween = binding.value.tween
+    el.__vTimeline__ = tween(gsap, {
+      trigger: el,
+      start: 'top 80%',
+      end: 'top 80%',
+      // scrub: true,
+      toggleActions: 'play none reverse none',
+      markers: true,
+    })
+  },
+  unbind(el, binding) {
+    // Remove Event Listeners
+    el.__vTimeline__.clear()
+    delete el.__vTimeline__
   },
 })

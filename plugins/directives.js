@@ -38,6 +38,41 @@ Vue.directive('hover', {
     delete el.__vHoverLeave__
   },
 })
+Vue.directive('flip', {
+  bind(el, binding, vNode) {
+    const front = el.querySelector('[data-front]')
+    const back = el.querySelector('[data-back]')
+    if (front && back) {
+      gsap.set(front, { rotationY: 0 })
+      gsap.set(back, { rotationY: -180 })
+      el.__vflipOver__ = () => flipCard(el, 1)
+      el.__vflipBack__ = () => flipCard(el, -1)
+
+      // Add Event Listeners
+      el.addEventListener('mouseover', el.__vflipOver__)
+      el.addEventListener('mouseleave', el.__vflipBack__)
+    }
+  },
+  unbind(el, binding) {
+    // Remove Event Listeners
+    el.removeEventListener('mouseover', el.__vflipOver__)
+    el.removeEventListener('mouseleave', el.__vflipBack__)
+    delete el.__vflipOver__
+    delete el.__vflipBack__
+  },
+})
+function flipCard(e, dir) {
+  const frontRotation = dir > 0 ? 180 : 0
+  const backRotation = dir > 0 ? 0 : -180
+  gsap.to(e.querySelector('[data-front]'), {
+    rotationY: frontRotation,
+    duration: 1,
+  })
+  gsap.to(e.querySelector('[data-back]'), {
+    rotationY: backRotation,
+    duration: 1,
+  })
+}
 Vue.directive('scrolltrigger', {
   bind(el, binding, vNode) {
     // Provided expression must evaluate to an object.

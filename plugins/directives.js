@@ -98,7 +98,7 @@ Vue.directive('scrolltrigger', {
       end: 'top 80%',
       // scrub: true,
       toggleActions: 'play none reverse none',
-      markers: true,
+      markers: false,
     })
   },
   unbind(el, binding) {

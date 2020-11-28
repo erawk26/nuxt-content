@@ -35,7 +35,6 @@
 export default {
   components: {
     MyLink: () => import('~/components/Link'),
-    TimeSince: () => import('~/components/TimeSince'),
   },
   props: {
     project: {

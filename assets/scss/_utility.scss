@@ -95,6 +95,13 @@
   &.square {
     padding-bottom: 100%;
   }
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
   @include default-transition(padding-bottom, 1s);
 }
 // .video {
@@ -120,10 +127,12 @@
   &.quinary {
     color: $quinary;
   }
-  &.blk {
+  &.blk,
+  &.black {
     color: $black;
   }
-  &.wht {
+  &.wht,
+  &.white {
     color: $white;
   }
   &.dk-gray {
@@ -328,7 +337,8 @@
   flex-shrink: 0;
 }
 
-.box-shadow {
+.box-shadow,
+.drop-shadow {
   @include dropShadow;
 }
 

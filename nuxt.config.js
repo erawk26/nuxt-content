@@ -23,7 +23,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
+  css: ['@/assets/scss/global.scss'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

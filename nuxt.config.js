@@ -55,7 +55,7 @@ export default {
     treeShake: true,
     defaultAssets: {
       font: {
-        family: 'Lato',
+        family: 'Playfair Display',
       },
     },
     theme: {

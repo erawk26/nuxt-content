@@ -25,12 +25,13 @@
           .lname {{ resume.lname }}
         .jobtitle.uc.mt-2 {{ resume.title }}
     .eo-flex.pa-0.col.a-stretch.col-left.row-2.row-span-1
-      .skill.pl-4.eo-flex.rel(
+      .skill.pl-4.eo-flex.center.rel(
         v-for='(rating, name) in resume.skills',
         :key='name',
         :title='"Experience Level: " + rating'
       )
-        .name.my-2.flex-grow-1.all-caps {{ name }}
+        .name.py-2.flex-grow-1.all-caps {{ name }}
+        vertical-drag-svg.dots-svg
         client-only(placeholder='Loading...')
           star-rating(
             :rating='rating',
@@ -75,6 +76,7 @@ export default {
   // return +to.query.page < +from.query.page ? 'slide-up' : 'slide-down'
   components: {
     HeadshotSvg: () => import('~/assets/img/headshot.svg'),
+    verticalDragSvg: () => import('~/assets/img/verticalDrag.svg'),
     MyMenu: () => import('~/components/Menu.vue'),
     MyLink: () => import('~/components/Link.vue'),
   },
@@ -223,9 +225,20 @@ export default {
     border-right: none;
     padding-right: 11rem;
     .name {
+      position: relative;
+      padding-right: 20px;
       font-size: 2.4rem;
       @media (max-width: $bp-xs - 1) {
         font-size: 2rem;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        // background-image: url('~@/assets/img/verticalDrag.svg');
+        top: 0;
+        right: 5px;
+        height: 100%;
+        width: 10px;
       }
     }
     &:last-child {
@@ -233,7 +246,22 @@ export default {
     }
     // border-left: 2px dashed #999;
   }
-
+  .dots-svg {
+    display: inline-block;
+    height: 2em;
+    width: auto;
+    margin: 0;
+    overflow: visible;
+    opacity: 0.15;
+    color: black;
+    path {
+      fill: currentColor;
+    }
+    .theme--dark & {
+      color: white;
+      opacity: 0.25;
+    }
+  }
   .vue-star-rating {
     top: 50%;
     right: 0.5rem;

@@ -1,0 +1,29 @@
+/* playfair-display-regular - latin */
+@font-face {
+  font-family: 'Playfair Display';
+  src: local(''),
+       url('../fonts/PlayfairDisplay.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../fonts/PlayfairDisplay.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* playfair-display-regular - latin */
+@font-face {
+  font-family: 'Sofia Pro';
+  font-weight: normal;
+  src: local(''),
+       url('../fonts/SofiaProLight.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../fonts/SofiaProLight.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}/* playfair-display-regular - latin */
+@font-face {
+  font-family: 'Sofia Pro';
+  font-weight: bold;
+  src: local(''),
+       url('../fonts/SofiaProBold.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../fonts/SofiaProBold.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+// @font-face {
+//   font-family: 'Sofia Pro';
+//   font-weight: normal;
+//   src: local(''),
+//        url('../fonts/SofiaProRegular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+//        url('../fonts/SofiaProRegular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+// }

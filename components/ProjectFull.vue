@@ -14,7 +14,7 @@
             my-link.ml-2(:text="link.text" :icon="link.icon||'mdi-link'" :href="link.href" :target="link.target" :title="link.title" hideText)
         small.counter.flex-shrink-0 {{active + 1}} / {{keys.length}}
           nuxt-link(:to="keys[looper(projects,active,1)]" :key="active")
-            v-icon chevron_right
+            v-icon mdi-chevron-right
       subheading {{project.title}}
       v-divider
       .eo-flex.wrap.j-center.a-start

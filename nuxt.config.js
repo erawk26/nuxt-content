@@ -1,5 +1,5 @@
 // import colors from 'vuetify/es5/util/colors'
-
+import path from 'path'
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -23,7 +23,13 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['@/assets/scss/global.scss'],
+  css: [
+    '@/assets/scss/global.scss',
+    path.resolve(
+      __dirname,
+      'node_modules/vue-multiselect/dist/vue-multiselect.min.css'
+    ),
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

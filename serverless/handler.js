@@ -44,7 +44,7 @@ function generateEmailParams(body) {
       Body: {
         Text: {
           Charset: 'UTF-8',
-          Data: `Message sent from email ${email} by ${name}\pPhone: ${phone}\nMessage: ${message}`,
+          Data: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
         },
       },
       Subject: {

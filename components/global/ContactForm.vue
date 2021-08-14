@@ -56,7 +56,6 @@ export default {
   },
   data: () => ({
     visitor: { name: '', email: '', message: '', phone: '' },
-    url: process.env.NUXT_ENV_DEV_SEND_MAIL,
     nameRules: [(v) => !!v || 'Name is required'],
     emailRules: [
       (v) => !!v || 'E-mail is required',
@@ -83,21 +82,21 @@ export default {
       e.preventDefault()
       if (this.$refs.form.validate()) {
         const { email, phone, name, message } = this.visitor
-        this.sendEmail(
-          this.visitor.email + 'sent you an email from your website!',
-          {
-            name,
-            email,
-            phone,
-            message,
-          }
-        )
+        this.sendEmail(email + 'sent you an email from your website!', {
+          name,
+          email,
+          phone,
+          message,
+        })
         console.log('Form Submitted!')
       }
     },
     sendEmail(subject, body) {
-      console.log('sendmail fired', subject, body)
-      fetch(this.url, {
+      const url =
+        process.env.NODE_ENV === 'development'
+          ? process.env.NUXT_ENV_DEV_SEND_MAIL
+          : process.env.NUXT_ENV_PROD_SEND_MAIL
+      fetch(url, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -109,24 +108,21 @@ export default {
         .then((res) => {
           this.status =
             "Thanks for sending me a message! I'll get in touch with you ASAP. :)"
-          console.log('Promise Sucess', res)
-          this.resetForm(200)
+          this.reset()
+          setTimeout(() => {
+            this.status = ''
+          }, 5000)
         })
         .catch((err) => {
           this.status =
             "I'm sorry There was an error with sending your message. :(\n" +
             err.message
           console.error({ err })
-          this.resetForm()
+          this.reset()
+          setTimeout(() => {
+            this.status = ''
+          }, 10000)
         })
-    },
-    resetForm(time) {
-      time = time || 10000
-      this.visitor = { name: '', email: '', message: '', phone: '' }
-      this.showErrors = false
-      setTimeout(function () {
-        this.status = ''
-      }, time)
     },
     // checkField (e) {
     //   // console.log(_invalid, _val);

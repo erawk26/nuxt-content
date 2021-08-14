@@ -1,14 +1,14 @@
 <template lang="pug">
 .form-container.ml-0
   v-form.full-width(ref='form', v-model='valid', lazy-validation='')
-    .eo-flex.wrap.contact-info
-      v-card.warning.pa-2(v-if='status.length') {{ status }}
+    .eo-flex.wrap.contact-info.pb-3
       .cell.eo-flex.a-center.inline.fa.fa-phone.color.blk
         span.screen-reader Phone Number
         img.txt(src='~/assets/img/phone.png', alt='Phone Number')
       .cell.eo-flex.a-center.inline.fa.fa-envelope-o
         span.screen-reader E-Mail Address
         img.txt(src='~/assets/img/email.png', alt='Email')
+    v-alert.pa-2.full-width(v-if='status.message', :type='status.type') {{ status.message }}
     v-text-field(
       outlined,
       v-model='visitor.name',
@@ -72,7 +72,7 @@ export default {
       (v) => (v && v.length >= 10) || 'Message must be more than 10 characters',
     ],
     valid: false,
-    status: '',
+    status: { message: null, type: null },
   }),
   methods: {
     reset() {
@@ -91,6 +91,12 @@ export default {
         console.log('Form Submitted!')
       }
     },
+    setStatus(message, type = 'success', time = 5) {
+      this.status = { message, type }
+      setTimeout(() => {
+        this.status = { message: null, type: null }
+      }, time * 1000)
+    },
     sendEmail(subject, body) {
       const url =
         process.env.NODE_ENV === 'development'
@@ -106,22 +112,16 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          this.status =
+          const msg =
             "Thanks for sending me a message! I'll get in touch with you ASAP. :)"
+          this.setStatus(msg, 'success')
           this.reset()
-          setTimeout(() => {
-            this.status = ''
-          }, 5000)
         })
         .catch((err) => {
-          this.status =
-            "I'm sorry There was an error with sending your message. :(\n" +
-            err.message
+          const msg = `I'm sorry There was an error with sending your message. :(\n${err.message}`
+          this.setStatus(msg, 'error', 10)
           console.error({ err })
           this.reset()
-          setTimeout(() => {
-            this.status = ''
-          }, 10000)
         })
     },
     // checkField (e) {

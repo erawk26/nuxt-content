@@ -56,7 +56,7 @@ export default {
   },
   data: () => ({
     visitor: { name: '', email: '', message: '', phone: '' },
-    url: process.env.NUXT_ENV_SEND_MAIL,
+    url: process.env.NUXT_ENV_DEV_SEND_MAIL,
     nameRules: [(v) => !!v || 'Name is required'],
     emailRules: [
       (v) => !!v || 'E-mail is required',
@@ -82,12 +82,14 @@ export default {
     submitForm(e) {
       e.preventDefault()
       if (this.$refs.form.validate()) {
+        const { email, phone, name, message } = this.visitor
         this.sendEmail(
           this.visitor.email + 'sent you an email from your website!',
           {
-            name: this.visitor.name,
-            email: this.visitor.email,
-            content: this.visitor.message + '\n' + this.visitor.phone,
+            name,
+            email,
+            phone,
+            message,
           }
         )
         console.log('Form Submitted!')

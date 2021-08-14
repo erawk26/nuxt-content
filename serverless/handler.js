@@ -30,9 +30,9 @@ function generateError(code, err) {
 
 function generateEmailParams(body) {
   const { email, name, phone, message } = JSON.parse(body)
-  if (!(email && name && phone && message)) {
+  if (!(email && name && message)) {
     throw new Error(
-      "Missing parameters! Make sure to add parameters 'email', 'name', 'phone', 'message'."
+      "Missing parameters! Make sure to add parameters 'email', 'name', 'message'."
     )
   }
 

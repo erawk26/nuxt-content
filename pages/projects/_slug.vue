@@ -1,26 +1,26 @@
 <template lang="pug">
 section.page
-  h1 {{ project.title }}
-  p {{ project.description }}
-  div(v-for='item in projects', :key='item.title')
-    | {{ item.title }}
-  nuxt-content(:document='project')
+  project(:project="project" :projects="projects" :prev="prev" :next="next")
 </template>
 
 <script>
 export default {
+  components: {
+    Project: () => import('~/components/ProjectFull'),
+  },
   async asyncData({ $content, params, error }) {
     const slug = params.slug || 'index'
     const reportErr = (err) => {
-      console.log(err)
       error({ statusCode: 404, message: 'Page not found', res: err })
     }
     const project = await $content('projects', slug).fetch().catch(reportErr)
     let [prev, next] = await $content('projects')
       .only(['title', 'slug'])
+      .where({ slug: { $ne: 'index' } })
       .sortBy('date', 'desc')
       .surround(params.slug)
       .fetch()
+      .catch(reportErr)
     const projects = await $content('projects')
       .only(['title', 'slug'])
       .where({ slug: { $ne: 'index' } })

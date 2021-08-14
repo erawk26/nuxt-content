@@ -13,7 +13,7 @@
           template(v-for="link in project.links" )
             my-link.ml-2(:text="link.text" :icon="link.icon||'mdi-link'" :href="link.href" :target="link.target" :title="link.title" hideText)
         small.counter.flex-shrink-0 {{active + 1}} / {{keys.length}}
-          nuxt-link(:to="keys[looper(projects,active,1)]" :key="active")
+          nuxt-link(:to="next.path" :key="active")
             v-icon mdi-chevron-right
       subheading {{project.title}}
       v-divider
@@ -38,6 +38,14 @@ export default {
   },
   props: {
     project: {
+      type: Object,
+      default: () => {},
+    },
+    prev: {
+      type: Object,
+      default: () => {},
+    },
+    next: {
       type: Object,
       default: () => {},
     },

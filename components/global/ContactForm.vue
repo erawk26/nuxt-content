@@ -1,22 +1,50 @@
 <template lang="pug">
-    .form-container.ml-0
-      v-form.full-width(ref='form' v-model='valid' lazy-validation='')
-        .eo-flex.wrap.contact-info
-          v-card.warning.pa-2(v-if="status.length") {{status}}
-          .cell.eo-flex.a-center.inline.fa.fa-phone.color.blk
-            span.screen-reader Phone Number
-            img.txt(src='~/assets/img/phone.png', alt="Phone Number")
-          .cell.eo-flex.a-center.inline.fa.fa-envelope-o
-            span.screen-reader E-Mail Address
-            img.txt(src='~/assets/img/email.png', alt="Email")
-        v-text-field(outlined v-model='visitor.name' :rules='nameRules' label='Name' required)
-        v-text-field(outlined v-model='visitor.email' :rules='emailRules' label='E-mail' required)
-        v-text-field(outlined v-model='visitor.phone' :rules='phoneRules' label='Phone')
-        v-textarea(outlined v-model='visitor.message' :rules='messageRules' label='Message' required)
-        v-btn.mr-4.bold(outlined :disabled='!valid' color='success' @click='submitForm')
-          | Send
-        v-btn.mr-4.bold(outlined color='error' @click='reset')
-          | Clear   
+.form-container.ml-0
+  v-form.full-width(ref='form', v-model='valid', lazy-validation='')
+    .eo-flex.wrap.contact-info
+      v-card.warning.pa-2(v-if='status.length') {{ status }}
+      .cell.eo-flex.a-center.inline.fa.fa-phone.color.blk
+        span.screen-reader Phone Number
+        img.txt(src='~/assets/img/phone.png', alt='Phone Number')
+      .cell.eo-flex.a-center.inline.fa.fa-envelope-o
+        span.screen-reader E-Mail Address
+        img.txt(src='~/assets/img/email.png', alt='Email')
+    v-text-field(
+      outlined,
+      v-model='visitor.name',
+      :rules='nameRules',
+      label='Name',
+      required
+    )
+    v-text-field(
+      outlined,
+      v-model='visitor.email',
+      :rules='emailRules',
+      label='E-mail',
+      required
+    )
+    v-text-field(
+      outlined,
+      v-model='visitor.phone',
+      :rules='phoneRules',
+      label='Phone'
+    )
+    v-textarea(
+      outlined,
+      v-model='visitor.message',
+      :rules='messageRules',
+      label='Message',
+      required
+    )
+    v-btn.mr-4.bold(
+      outlined,
+      :disabled='!valid',
+      color='success',
+      @click='submitForm'
+    )
+      | Send
+    v-btn.mr-4.bold(outlined, color='error', @click='reset')
+      | Clear
 </template>
 
 <script>
@@ -28,8 +56,7 @@ export default {
   },
   data: () => ({
     visitor: { name: '', email: '', message: '', phone: '' },
-    url:
-      'https://zepn0cfhee.execute-api.us-east-1.amazonaws.com/prod/email/send',
+    url: process.env.NUXT_ENV_SEND_MAIL,
     nameRules: [(v) => !!v || 'Name is required'],
     emailRules: [
       (v) => !!v || 'E-mail is required',
@@ -68,7 +95,7 @@ export default {
     },
     sendEmail(subject, body) {
       console.log('sendmail fired', subject, body)
-      return fetch(this.url, {
+      fetch(this.url, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -85,8 +112,9 @@ export default {
         })
         .catch((err) => {
           this.status =
-            "I'm sorry There was an error with sending your message. :(\n" + err
-          console.log(err)
+            "I'm sorry There was an error with sending your message. :(\n" +
+            err.message
+          console.error({ err })
           this.resetForm()
         })
     },

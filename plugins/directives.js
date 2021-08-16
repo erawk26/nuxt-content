@@ -103,7 +103,9 @@ Vue.directive('scrolltrigger', {
   },
   unbind(el, binding) {
     // Remove Event Listeners
-    el.__vTimeline__.clear()
+    if (el.__vTimeline__) {
+      el.__vTimeline__.clear()
+    }
     delete el.__vTimeline__
   },
 })

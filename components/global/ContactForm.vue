@@ -73,6 +73,7 @@ export default {
     ],
     valid: false,
     status: { message: null, type: null },
+    messageTimeout: null,
   }),
   methods: {
     reset() {
@@ -88,12 +89,13 @@ export default {
           phone,
           message,
         })
-        console.log('Form Submitted!')
+        this.setStatus('Form Submitted! Processing...', 'warning')
       }
     },
     setStatus(message, type = 'success', time = 5) {
+      clearTimeout(this.messageTimeout)
       this.status = { message, type }
-      setTimeout(() => {
+      this.messageTimeout = setTimeout(() => {
         this.status = { message: null, type: null }
       }, time * 1000)
     },

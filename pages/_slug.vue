@@ -10,7 +10,6 @@ export default {
   async asyncData({ $content, params, error }) {
     const slug = params.slug || 'index'
     const reportErr = (err) => {
-      console.log(err)
       error({ statusCode: 404, message: 'Page not found', res: err })
     }
     const page = await $content(slug).fetch().catch(reportErr)

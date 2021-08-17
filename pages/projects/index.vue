@@ -1,22 +1,36 @@
 <template lang="pug">
 section.page
   h1 {{ project.title }}
-  .eo-flex.col
-    project-teaser.my-5(
-      v-scrolltrigger='{ tween: animatedScroll}',
-      v-for='(item, i) in projects',
-      :key='i',
-      :project='item',
-      :ref='project.slug',
-      :index='i'
-    )
   nuxt-content(:document='project')
+  skills-filter(
+    :projects='projects',
+    :slug='project.slug',
+    @filterchange='(evt) => { filteredProjects = evt; }'
+  )
+  v-container.pa-0(fluid)
+    v-row
+      v-col.col-12.col-md-6(
+        v-for='(item, i) in filteredProjects || projects',
+        :key='i',
+        align-self='start'
+      )
+        project-teaser(
+          :project='item',
+          :ref='project.slug',
+          :orientation='i % 2 === 0 ? "left" : "right"'
+        )
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      filteredProjects: null,
+    }
+  },
   components: {
     ProjectTeaser: () => import('@/components/ProjectTeaser'),
+    SkillsFilter: () => import('@/components/SkillsFilter'),
   },
   async asyncData({ $content, params, error }) {
     const slug = 'index'
@@ -40,55 +54,7 @@ export default {
       meta,
     }
   },
-  methods: {
-    animatedScroll(gsap, scrollCfg) {
-      const container = scrollCfg.trigger
-      const ele1 = container.querySelector('.cell.alpha')
-      const ele2 = container.querySelector('.cell.omega')
-      const photoLeft = container.classList.contains('photo-left')
-      scrollCfg.start = 'top 80%'
-      scrollCfg.end = 'top 80%'
-      const tl = gsap.timeline({
-        scrollTrigger: scrollCfg,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          container.classList.add('animation-complete')
-        },
-      })
-      tl.fromTo(
-        container,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          duration: 0.25,
-        }
-      )
-        .fromTo(
-          ele1,
-          {
-            x: photoLeft ? -200 : 200,
-          },
-          {
-            x: 0,
-            duration: 0.5,
-          },
-          0.2
-        )
-        .fromTo(
-          ele2,
-          {
-            x: photoLeft ? 200 : -200,
-          },
-          {
-            x: 0,
-            duration: 0.5,
-          },
-          0.2
-        )
-
-      return tl
-    },
-  },
+  methods: {},
 }
 </script>
 <style lang="scss" scoped></style>

@@ -1,25 +1,29 @@
 <template lang="pug">
-nuxt-link.flip-card.d-flex.flex-wrap.align-start.rel.ar(
-  :to='"/projects/" + project.slug',
-  :class='$vuetify.breakpoint.smAndUp ? "seven-five" : "square"'
-)
-  article
-    v-card.card-front.abs-center.eo-flex.col.center(
-      ripple,
-      :elevation='hover ? 5 : 10'
-    )
-      media(v-if='project.media', v-bind='getMediaBind(project)')
-      .content.la.uc.full-width
-        div {{ project.title }}
-        small {{ project.client }}
-    v-card.card-back.abs-center(ripple, :elevation='hover ? 5 : 10')
-      .content.eo-flex.col.fill.dk-green.la.pa-5.full-height
-        subheading.mt-0.underline Skills:
-        ul.skill-wrap.unstyle.eo-flex.col.wrap.full-height
-          li.ma-1(v-for='(skill, i) in project.skills') {{ skill }}
+v-card.mx-auto.px-3.py-2
+  .rel
+    //- media(v-if='project.media', v-bind='getMediaBind(project)')
+    small.mr-2.mt-1.abs.top.right.time-since
+      time-since(:date='project.date')
+      | &nbsp;ago
+  .px-3.pt-2
+    h3 {{ project.title }}
+    h4 {{ project.client }}
+  v-card-actions.actions
+    v-btn(text, rounded, outlined, small, :to='project.path')
+      | View Project
+    v-spacer
+    v-btn(text, rounded, small, @click='show = !show')
+      | skills
+      v-icon {{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}
+  v-expand-transition
+    div(v-show='show')
+      v-divider
+      v-card-text
+        .skill-wrap.flex-grow.flex-shrink.overflow
+          ul.unstyle
+            li.ma-1(v-for='(skill, i) in project.skills', :key='i') {{ skill }}
 </template>
 <script>
-import { gsap } from 'gsap'
 export default {
   props: {
     // direction: { type: Number, default: 0 },
@@ -28,25 +32,16 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    orientation: {
+      type: String,
+      default: 'left',
+    },
   },
   data() {
     return {
+      show: false,
       hover: false,
     }
-  },
-  computed: {},
-  watch: {
-    hover(newVal) {
-      if (newVal) {
-        this.animation(1)
-      } else {
-        this.animation(-1)
-      }
-    },
-  },
-  mounted() {
-    gsap.set(this.$el.querySelector('.card-front'), { rotationY: 0 })
-    gsap.set(this.$el.querySelector('.card-back'), { rotationY: -180 })
   },
   methods: {
     enter() {
@@ -57,76 +52,46 @@ export default {
       this.hover = false
       this.$emit('exit')
     },
-    animation(dir) {
-      const frontRotation = dir > 0 ? 180 : 0
-      const backRotation = dir > 0 ? 0 : -180
-      gsap.to(this.$el.querySelector('.card-front'), {
-        rotationY: frontRotation,
-        duration: 1,
-      })
-      gsap.to(this.$el.querySelector('.card-back'), {
-        rotationY: backRotation,
-        duration: 1,
-      })
-    },
   },
 }
 </script>
-<style lang="scss">
-/// FLIP ANIMATION STYLING GOES UNDER HERE ///
-.flip-card article {
-  .img {
-    width: 100%;
-    flex: 1 0 calc(100% - 55px);
-  }
-  overflow: visible;
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  .card-front,
-  .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    &:before {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      content: '';
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-  }
-  .card-front {
-    .v-image {
-      height: 100%;
-    }
-  }
-  .card-back {
-    .content {
-      .subheading {
-        flex-grow: 1;
-        flex-shrink: 0;
-      }
-      > ul {
-        flex: 1;
+<style lang="scss" scoped="true">
+.actions {
+  font-family: $heading-font-family;
+  .v-btn {
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 1;
+    &.v-size--small {
+      height: auto;
+      min-height: 2.7rem;
+      i.mdi::before {
+        position: relative;
+        top: -1px;
       }
     }
+  }
+  .spacer + .v-btn {
+    padding-right: 0.3rem;
   }
 }
-.skill-wrap {
-  padding: 3rem;
-  display: flex;
-  flex-wrap: wrap;
-  span {
-    text-align: left;
-    flex: 1 1 49.5%;
-    min-width: 49.5%;
-    max-width: 49.5%;
-    padding: 0.5rem 1rem;
+h3,
+h4 {
+  font-weight: 500;
+  margin-top: 0;
+  line-height: 1.2;
+}
+h4 {
+  font-size: 1.8rem;
+}
+h3 {
+  font-size: 2.4rem;
+}
+.skill-wrap ul {
+  column-count: 2;
+  li {
+    font-size: 1.4rem;
+    line-height: 1.4;
   }
 }
 </style>

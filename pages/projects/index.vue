@@ -2,32 +2,29 @@
 section.page
   h1 {{ project.title }}
   nuxt-content(:document='project')
-  skills-filter(
-    :projects='projects',
-    :slug='project.slug',
-    @filterchange='(evt) => { filteredProjects = evt; }'
-  )
-  v-container.pa-0(fluid)
-    v-row
-      v-col.col-12.col-md-6(
-        v-for='(item, i) in filteredProjects || projects',
-        :key='i',
-        align-self='start'
-      )
-        project-teaser(
-          :project='item',
-          :ref='project.slug',
-          :orientation='i % 2 === 0 ? "left" : "right"'
+  v-row(justify='center')
+    v-expansion-panels.mb-1(:value='openedPanel')
+      v-expansion-panel
+        v-expansion-panel-header
+          subheading.filter Filters
+        v-expansion-panel-content(eager)
+          skills-filter(
+            :projects='projects',
+            :slug='project.slug',
+            @filterchange='(evt) => { filteredProjects = evt; }'
+          )
+    v-container.pa-0(fluid)
+      v-row(dense)
+        v-col.col-12.col-md-6(
+          v-for='(item, i) in filteredProjects || projects',
+          :key='project.slug + i',
+          align-self='start'
         )
+          project-teaser(:project='item', :ref='project.slug')
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      filteredProjects: null,
-    }
-  },
   components: {
     ProjectTeaser: () => import('@/components/ProjectTeaser'),
     SkillsFilter: () => import('@/components/SkillsFilter'),
@@ -48,13 +45,70 @@ export default {
       title: project.title,
       desc: project.description,
     }
+
     return {
       project,
       projects,
       meta,
     }
   },
-  methods: {},
+  data() {
+    return {
+      filteredProjects: null,
+      openedPanel: null,
+    }
+  },
+  mounted() {
+    if (this.$route.query.skills && this.$route.query.skills.length) {
+      this.openedPanel = 0
+    }
+  },
+  methods: {
+    closeAllPanels() {
+      this.openedPanel = []
+    },
+    openPanel(index) {
+      this.openedPanel.push(index)
+    },
+    closePanel(index) {
+      this.openedPanel.splice(index, 1)
+    },
+  },
+  // beforeMount() {
+  //   this.skillQuery = this.$route.query.skills
+  // },
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+.match-select-wrap .v-input {
+  flex: 0 0 5rem;
+  padding: 0 1rem;
+  margin-top: 0;
+  // margin: 1rem 1rem 0 1rem;
+  .v-input__slot {
+    margin-bottom: 0;
+  }
+  .v-text-field__details {
+    height: 0;
+    min-height: 0;
+  }
+}
+.v-expansion-panels button.v-expansion-panel-header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.filter.subheading {
+  margin: 0;
+}
+</style>
+<style scoped>
+.row--dense > .col,
+.row--dense > [class*='col-'] {
+  padding: 7.5px;
+}
+.row--dense {
+  margin-right: -7.5px;
+  margin-left: -7.5px;
+}
+</style>

@@ -1,13 +1,19 @@
 <template lang="pug">
-client-only(placeholder='Loading...', v-if='slug === "index"')
-  vue-multiselect.unstyle(
-    :options='Object.values(options)',
-    v-model='selected',
-    :multiple='true',
-    track-by='id',
-    label='label',
-    @input='onChange'
-  )
+div
+  .match-select-wrap.eo-flex.a-center.mb-3
+    | Match projects containing
+    v-select(v-model='skillOperator', :items='["any", "all"]')
+    | of the selected skills
+  client-only(placeholder='Loading...', v-if='slug === "index"')
+    vue-multiselect.unstyle(
+      :options='Object.values(options)',
+      placeholder='Filter Projects by Skill',
+      v-model='selected',
+      :multiple='true',
+      track-by='id',
+      label='label',
+      @input='onChange'
+    )
 </template>
 
 <script>
@@ -26,6 +32,7 @@ export default {
     },
   },
   data: () => ({
+    skillOperator: 'any',
     selected: [],
   }),
   computed: {
@@ -41,13 +48,25 @@ export default {
     },
     filteredProjects() {
       const filterSelected = this.projects.filter((p) => {
-        let bool = false
-        this.selected.forEach((selectedSkill) => {
-          if (p.skills.includes(selectedSkill.label)) {
-            bool = true
-          }
-        })
-        return bool
+        if (this.skillOperator === 'any') {
+          // match projects that contain ANY of the skills
+          let bool = false
+          this.selected.forEach((selectedSkill) => {
+            if (p.skills.includes(selectedSkill.label)) {
+              bool = true
+            }
+          })
+          return bool
+        } else {
+          // match projects that contain ALL of the skills
+          let bool = true
+          this.selected.forEach((selectedSkill) => {
+            if (!p.skills.includes(selectedSkill.label)) {
+              bool = false
+            }
+          })
+          return bool
+        }
       })
       const filterSlug = this.projects.filter((p) => {
         const keys = p.skills.map((s) => this.kebab(s))
@@ -67,20 +86,26 @@ export default {
       }))
     },
   },
+  watch: {
+    skillOperator(newValue, oldValue) {
+      this.onChange()
+    },
+  },
+  mounted() {
+    if (this.$route.query.skills && this.$route.query.skills.length) {
+      const ValidSkill = this.options.find(
+        (option) => option.id === this.$route.query.skills
+      )
+      this.selected = ValidSkill ? [ValidSkill] : []
+      this.onChange()
+    }
+  },
   methods: {
     onChange() {
       this.$emit('filterchange', this.filteredProjects)
     },
   },
-  mounted() {
-    const urlParams = new URLSearchParams(window.location.search)
-    const skillQuery = urlParams.get('skills')
-    if (skillQuery) {
-      this.selected = [this.options.find((option) => option.id === skillQuery)]
-      this.onChange()
-    }
-  },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

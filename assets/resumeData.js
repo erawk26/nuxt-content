@@ -41,7 +41,7 @@ export default {
       end: 'Present',
       position: 'Web Developer',
       desc:
-        "I'm currently responsible for all aspects of development when it comes to building highly scalable destination marketing websites in Drupal 7 and 8 as well as Vue. All these sites are ADA compliant, cross browser compatible, and leverage many 3rd party APIs.",
+        "I'm currently responsible for all aspects of development when it comes to building highly scalable destination marketing websites in Drupal 7, 8 and 9; as well as Vue. All these sites are ADA compliant, cross browser compatible, and leverage many 3rd party APIs.",
     },
     {
       company: 'Hark Inc.',

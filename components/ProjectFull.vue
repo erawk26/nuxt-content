@@ -34,7 +34,7 @@ v-container(v-on:keyup='onKeyUp')
           )
       subheading.mt-2 {{ project.client }}
     small.counter.flex-shrink-0 {{ active + 1 }} / {{ keys.length }}
-      nuxt-link(:to='next.path', :key='active')
+      nuxt-link(v-if='next.path' :to='next.path')
         v-icon mdi-chevron-right
   v-divider
   .eo-flex.wrap.j-center.a-start
@@ -68,11 +68,11 @@ export default {
     },
     prev: {
       type: Object,
-      default: () => {},
+      default: () => ({ path: null }),
     },
     next: {
       type: Object,
-      default: () => {},
+      default: () => ({ path: null }),
     },
     projects: {
       type: Array,

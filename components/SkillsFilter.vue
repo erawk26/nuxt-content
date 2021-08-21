@@ -103,6 +103,7 @@ export default {
       this.$emit('filterchange', this.filteredProjects)
     },
     setQuery() {
+      // set the url query from the components data
       const skills = this.selected.map((s) => s.id).join(',')
       if (this.selected.length) {
         const query = {
@@ -116,6 +117,7 @@ export default {
       }
     },
     getQuery() {
+      // get component data from the url query
       const { skills, match } = this.$route.query
       if (skills) {
         this.selected = this.options.filter((option) =>

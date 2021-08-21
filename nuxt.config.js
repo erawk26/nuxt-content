@@ -6,8 +6,11 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - nuxt-content',
-    title: 'nuxt-content',
+    // titleTemplate: '%s - nuxt-content',
+    htmlAttrs: {
+      lang: 'en',
+    },
+    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -51,7 +54,6 @@ export default {
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {},
-
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
     customVariables: ['@/assets/scss/vuetify-vars.scss'],

@@ -34,7 +34,11 @@ v-container(v-on:keyup='onKeyUp')
           )
       subheading.mt-2 {{ project.client }}
     small.counter.flex-shrink-0 {{ active + 1 }} / {{ keys.length }}
-      nuxt-link(v-if='next.path' :to='next.path')
+      nuxt-link(
+        :to='"/projects/" + next.slug',
+        :title='next.title',
+        aria-label='View Next Project'
+      )
         v-icon mdi-chevron-right
   v-divider
   .eo-flex.wrap.j-center.a-start
@@ -91,23 +95,23 @@ export default {
   },
   methods: {
     onKeyUp(evt) {
-      let path = null
+      let slug = null
       switch (evt.code) {
         case 'ArrowLeft':
-          path = this.prev.path
+          slug = this.prev.slug
           break
         case 'ArrowUp':
-          path = this.prev.path
+          slug = this.prev.slug
           break
         case 'ArrowRight':
-          path = this.next.path
+          slug = this.next.slug
           break
         case 'ArrowDown':
-          path = this.next.path
+          slug = this.next.slug
           break
       }
-      if (path) {
-        this.$router.push({ path })
+      if (slug) {
+        this.$router.push({ path: /projects/ + slug })
       }
     },
     onCarouselChange(evt) {
@@ -153,10 +157,6 @@ export default {
 }
 .v-btn i {
   margin-right: 0.25em;
-}
-// @include set-max-width;
-.cell {
-  // padding: 5px;
 }
 .alpha {
   flex: 2;

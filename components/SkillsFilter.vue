@@ -94,17 +94,36 @@ export default {
     },
   },
   mounted() {
-    if (this.$route.query.skills && this.$route.query.skills.length) {
-      const ValidSkill = this.options.find(
-        (option) => option.id === this.$route.query.skills
-      )
-      this.selected = ValidSkill ? [ValidSkill] : []
-      this.onChange()
-    }
+    this.getQuery()
   },
   methods: {
-    onChange() {
+    onChange(evt) {
+      this.setQuery()
       this.$emit('filterchange', this.filteredProjects)
+    },
+    setQuery() {
+      const skills = this.selected.map((s) => s.id).join(',')
+      if (this.selected.length) {
+        const query = {
+          ...this.$route.query,
+          skills,
+          match: this.skillOperator,
+        }
+        this.$router.push({ ...this.$route, query })
+      } else {
+        this.$router.push(this.$route.path)
+      }
+    },
+    getQuery() {
+      const { skills, match } = this.$route.query
+      if (skills) {
+        this.selected = this.options.filter((option) =>
+          skills.split(',').includes(option.id)
+        )
+      }
+      if (match) {
+        this.skillOperator = match
+      }
     },
   },
 }

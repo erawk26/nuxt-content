@@ -95,6 +95,7 @@ export default {
   },
   mounted() {
     this.getQuery()
+    this.$emit('filterchange', this.filteredProjects)
   },
   methods: {
     onChange(evt) {
@@ -124,9 +125,17 @@ export default {
       if (match) {
         this.skillOperator = match
       }
+      return Promise
     },
   },
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+ul.multiselect__content {
+  padding-left: 0;
+  li.multiselect__element {
+    margin: 0;
+  }
+}
+</style>

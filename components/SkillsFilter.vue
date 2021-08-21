@@ -1,9 +1,9 @@
 <template lang="pug">
 div
-  .match-select-wrap.eo-flex.a-center.mb-3
-    | Match projects containing
-    v-select(v-model='skillOperator', :items='["any", "all"]')
-    | of the selected skills
+  .match-select-wrap.eo-flex.wrap.a-center.mb-3
+    span.mr-2 Match projects containing
+    v-select.mr-2(v-model='skillOperator', :items='["any", "all"]')
+    span of the selected skills
   client-only(placeholder='Loading...', v-if='slug === "index"')
     vue-multiselect.unstyle(
       :options='Object.values(options)',
@@ -138,6 +138,25 @@ ul.multiselect__content {
   padding-left: 0;
   li.multiselect__element {
     margin: 0;
+  }
+}
+
+.v-select-list .v-list-item__title {
+  font-size: 1em;
+}
+.match-select-wrap {
+  .v-input {
+    flex: 0 0 5rem;
+    padding: 0;
+    margin-top: 0;
+
+    .v-input__slot {
+      margin-bottom: 0;
+    }
+    .v-text-field__details {
+      height: 0;
+      min-height: 0;
+    }
   }
 }
 </style>

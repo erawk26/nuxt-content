@@ -80,19 +80,6 @@ export default {
 }
 </script>
 <style lang="scss">
-.match-select-wrap .v-input {
-  flex: 0 0 5rem;
-  padding: 0 1rem;
-  margin-top: 0;
-  // margin: 1rem 1rem 0 1rem;
-  .v-input__slot {
-    margin-bottom: 0;
-  }
-  .v-text-field__details {
-    height: 0;
-    min-height: 0;
-  }
-}
 .v-expansion-panels button.v-expansion-panel-header {
   padding-top: 10px;
   padding-bottom: 10px;

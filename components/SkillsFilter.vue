@@ -80,10 +80,12 @@ export default {
         : this.projects
     },
     options() {
-      return Object.keys(this.skills).map((k) => ({
-        id: k,
-        label: this.skills[k],
-      }))
+      return Object.keys(this.skills)
+        .sort()
+        .map((k) => ({
+          id: k,
+          label: this.skills[k],
+        }))
     },
   },
   watch: {

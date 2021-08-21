@@ -1,5 +1,5 @@
 <template lang="pug">
-span
+span.theme-toggle
   v-tooltip(
     allow-overflow,
     right,
@@ -32,10 +32,13 @@ export default {
     isNight: () => new Date().getHours() < 7 || new Date().getHours() > 17,
   },
   mounted() {
-    if (this.colorMode === 'auto') {
-      // if the color mode is set to auto change the theme based on time of day
-      this.changeTheme(this.isNight)
+    const storedColorMode = localStorage.getItem('colorMode')
+    if (storedColorMode) {
+      this.colorMode = storedColorMode
     }
+    const bool =
+      this.colorMode === 'auto' ? this.isNight : this.colorMode === 'dark'
+    this.changeTheme(bool)
   },
   methods: {
     changeTheme(bool) {
@@ -60,14 +63,17 @@ export default {
     cycleTheme() {
       // set colormode var, set theme
       this.colorMode = this.getNextColorMode()
-      this.colorMode === 'auto'
-        ? this.changeTheme(this.isNight)
-        : this.colorMode === 'dark'
-        ? this.changeTheme(true)
-        : this.changeTheme(false)
+      localStorage.setItem('colorMode', this.colorMode)
+      const bool =
+        this.colorMode === 'auto' ? this.isNight : this.colorMode === 'dark'
+      this.changeTheme(bool)
     },
   },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.theme-toggle i {
+  line-height: 0.875 !important;
+}
+</style>

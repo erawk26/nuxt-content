@@ -1,5 +1,6 @@
 export const company = {
   name: 'Erik Olsen',
+  jobTitle: 'Full Stack Engineer',
   address: '1214 Sea Plume Way',
   city: 'Sarasota',
   state: 'FL',

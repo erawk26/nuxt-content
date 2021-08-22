@@ -40,13 +40,20 @@ Vue.directive('hover', {
 })
 Vue.directive('flip', {
   bind(el, binding, vNode) {
+    const rotation =
+      'value' in binding &&
+      'axis' in binding.value &&
+      binding.value.axis === 'y'
+        ? 'rotationX'
+        : 'rotationY'
     const front = el.querySelector('[data-front]')
     const back = el.querySelector('[data-back]')
     if (front && back) {
-      gsap.set(front, { rotationY: 0 })
-      gsap.set(back, { rotationY: -180 })
-      el.__vflipOver__ = () => flipCard(el, 1)
-      el.__vflipBack__ = () => flipCard(el, -1)
+      gsap.set(front, { [rotation]: 0 })
+      gsap.set(back, { [rotation]: -180 })
+      // console.log({ binding: binding.value.axis, rotation })
+      el.__vflipOver__ = () => flipCard(el, 1, rotation)
+      el.__vflipBack__ = () => flipCard(el, -1, rotation)
 
       // Add Event Listeners
       el.addEventListener('mouseover', el.__vflipOver__)
@@ -61,15 +68,15 @@ Vue.directive('flip', {
     delete el.__vflipBack__
   },
 })
-function flipCard(e, dir) {
+function flipCard(e, dir, rotation) {
   const frontRotation = dir > 0 ? 180 : 0
   const backRotation = dir > 0 ? 0 : -180
   gsap.to(e.querySelector('[data-front]'), {
-    rotationY: frontRotation,
+    [rotation]: frontRotation,
     duration: 1,
   })
   gsap.to(e.querySelector('[data-back]'), {
-    rotationY: backRotation,
+    [rotation]: backRotation,
     duration: 1,
   })
 }

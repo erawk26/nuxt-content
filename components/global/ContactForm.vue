@@ -155,6 +155,8 @@ export default {
   filter: invert(1);
 }
 .form-container {
+}
+section.page.component-content.contact--page {
   @include set-max-width(500px);
 }
 </style>

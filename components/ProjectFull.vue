@@ -33,7 +33,7 @@ v-container(v-on:keyup='onKeyUp')
             hideText
           )
       subheading.mt-2 {{ project.client }}
-    small.counter.flex-shrink-0 {{ active + 1 }} / {{ keys.length }}
+    .counter.flex-shrink-0 {{ active + 1 }} / {{ keys.length }}
       nuxt-link(
         :to='"/projects/" + next.slug',
         :title='next.title',
@@ -148,8 +148,12 @@ export default {
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
   font-family: $heading-font-family;
-  i::before {
-    height: 1.12em;
+
+  i {
+    font-size: 4rem;
+    &::before {
+      height: 1.12em;
+    }
   }
 }
 .v-card {

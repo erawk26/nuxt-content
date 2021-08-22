@@ -1,14 +1,13 @@
 <template lang="pug">
-v-card.mx-auto.px-3.py-2
-  .rel
-    //- media(v-if='project.media', v-bind='getMediaBind(project)')
-    small.mr-2.mt-1.abs.top.right.time-since
+v-card.mx-auto.px-4.py-3
+  .eo-flex.wrap.j-space-b.top-info-wrap
+    .client-project.ml-3.mt-2
+      h3 {{ project.title }}
+      h4.mb-0 {{ project.client }}
+    small.ml-3.mt-2.time-since
       time-since(:date='project.date')
       | &nbsp;ago
-  .px-3.pt-2
-    h3 {{ project.title }}
-    h4 {{ project.client }}
-  v-card-actions.actions
+  v-card-actions.actions.mt-3.pa-0
     v-btn(text, rounded, outlined, small, :to='project.path')
       | View Project
     v-spacer
@@ -17,8 +16,8 @@ v-card.mx-auto.px-3.py-2
       v-icon {{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}
   v-expand-transition
     div(v-show='show')
-      v-divider
-      v-card-text
+      v-divider.mt-3.mb-2
+      v-card-text.pa-0
         .skill-wrap.flex-grow.flex-shrink.overflow
           ul.unstyle
             li.ma-1(v-for='(skill, i) in project.skills', :key='i') {{ skill }}
@@ -86,6 +85,9 @@ h4 {
 }
 h3 {
   font-size: 2.4rem;
+}
+.top-info-wrap {
+  margin: -8px 0 0 -12px;
 }
 .skill-wrap ul {
   column-count: 2;

@@ -1,8 +1,8 @@
 ---
 title: Contact
-description: This is my Contact page
+desc: null
 ---
 
-## Drop a note!
 
+### Drop a note!
 <contact-form>

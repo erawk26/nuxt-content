@@ -1,5 +1,5 @@
 ---
-title: My Resume
-description: This is my Resume
+title: Resume
+description: null
 ---
 <resume>

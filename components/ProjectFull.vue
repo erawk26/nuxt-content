@@ -181,4 +181,16 @@ export default {
 .min-media-height > * {
   min-height: 32rem;
 }
+.v-window__prev,
+.v-window__next {
+  i {
+    position: relative;
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
 </style>

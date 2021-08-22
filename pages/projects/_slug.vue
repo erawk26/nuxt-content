@@ -1,5 +1,5 @@
 <template lang="pug">
-section.page
+section.page(:class="`${project.slug}--page`")
   project(:project="project" :projects="projects" :prev="prev" :next="next")
 </template>
 

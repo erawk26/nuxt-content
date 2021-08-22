@@ -1,7 +1,7 @@
 <template lang="pug">
-section.page
-  h1 {{ page.title }}
-  p {{ page.description }}
+section.page(:class="`${slug}--page`")
+  h1.visually-hidden {{ page.title }}
+  p(v-if="page.description") {{ page.description }}
   nuxt-content(:document='page')
 </template>
 
@@ -19,6 +19,7 @@ export default {
       desc: page.description,
     }
     return {
+      slug,
       page,
       meta,
     }

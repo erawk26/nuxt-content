@@ -29,7 +29,7 @@ export default {
     'Greensock / Animations': 4,
     'Google APIs': 4,
     GIT: 4.5,
-    'CI/CD': 3.5,
+    'CI / CD': 3.5,
     'Async/Await': 4.5,
     REST: 4.5,
     GraphQL: 3.75,

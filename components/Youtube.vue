@@ -55,7 +55,7 @@ export default {
     }
   },
   // eslint-disable-next-line no-console
-  watch: { statusMsg: (message) => console.log(message) },
+  // watch: { statusMsg: (message) => console.log(message) },
   methods: {
     calculateProgress() {
       if (this.player) {

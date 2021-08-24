@@ -1,7 +1,7 @@
 ---
 title: Things To Do Section
 client: Visit Maryland
-description: This was another custom Drupal module, using Greensock for the animation and Vue for the event handling and switching the content.
+description: This was another custom Drupal module, using Greensock for the animation and Vue for switching the content and the event handling.
 date: '2020-07-01'
 media:
   -

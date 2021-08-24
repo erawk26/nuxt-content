@@ -10,12 +10,10 @@ media:
 skills:
   - Drupal 8
   - CMS Structuring
-  - CSS Positioning
+  - Drupal Custom Module
   - ES6+ VanillaJS
   - VueJS
   - Greensock Animations
-  - CSS Grid
-  - Flex Layout
 links:
   - target: _blank
     href: https://www.exploreminnesota.com

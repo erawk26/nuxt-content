@@ -12,11 +12,8 @@ media:
     src: mbf.jpg
 skills:
   - Drupal 7
-  - Responsive Styling
   - CMS Structuring
   - Drupal Paragraphs
   - Custom PHP
-  - CSS Positioning
-  - Flex Layout
 ---
 

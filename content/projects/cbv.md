@@ -11,9 +11,6 @@ skills:
   - Drupal 8
   - CSS Grid
   - CMS Structuring
-  - Slick Slider
-  - CSS Positioning
-  - Flex Layout
 links:
   - target: _blank
     href: https://www.communitybarnventures.com/client-spotlight

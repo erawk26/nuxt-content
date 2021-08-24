@@ -310,5 +310,12 @@ export default {
     max-width: 100% !important;
     width: 100% !important;
   }
+  .v-main {
+    padding: 0 !important;
+  }
+  .my-5,
+  .resume {
+    margin: 0 !important;
+  }
 }
 </style>

@@ -18,7 +18,7 @@ skills:
   - no jQuery
 links:
   - target: _blank
-    href: https://github.com/erawk26/portfolio
+    href: https://github.com/erawk26/nuxt-content
     title: Browse this GitHub repo
     text: GitHub Repo
     icon: mdi-github

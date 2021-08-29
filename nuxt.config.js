@@ -39,6 +39,7 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
+    '@nuxtjs/google-analytics',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
@@ -95,7 +96,9 @@ export default {
       },
     },
   },
-
+  googleAnalytics: {
+    id: 'UA-115116018-1',
+  },
   plugins: [
     { src: '@/plugins/starRating.js', mode: 'client' },
     { src: '@/plugins/youtube.js', mode: 'client' },

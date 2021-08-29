@@ -1,4 +1,5 @@
 # Portfolio v4 - Nuxt Content
+[https://www.erikthedeveloper.com](https://www.erikthedeveloper.com)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ab8e9b12-81d8-4199-be51-f42a3c32d77f/deploy-status)](https://app.netlify.com/sites/erikthedeveloper-portfolio/deploys)
 

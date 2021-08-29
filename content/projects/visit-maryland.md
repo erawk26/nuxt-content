@@ -5,8 +5,8 @@ description: This was another custom Drupal module, using Greensock for the anim
 date: '2020-07-01'
 media:
   -
-    type: youtube
-    ytId: dHLC6rC2l8o
+    type: video
+    sources: [exploreMD.mp4]
 skills:
   - Drupal 8
   - Drupal Custom Route / Controller

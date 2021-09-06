@@ -1,0 +1,29 @@
+/* @font-face {
+  font-family: 'Material Design Icons';
+  src: url('materialdesignicons-webfont.woff2') format('woff2'),
+    url('materialdesignicons-webfont.woff') format('woff');
+  font-display: swap;
+} */
+@font-face {
+  font-family: 'Playfair Display';
+  font-display: swap;
+  src: local(''),
+       url('PlayfairDisplay.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('PlayfairDisplay.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+@font-face {
+  font-family: 'Sofia Pro';
+  font-weight: normal;
+  font-display: swap;
+  src: local(''),
+       url('SofiaProLight.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('SofiaProLight.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+@font-face {
+  font-family: 'Sofia Pro';
+  font-weight: bold;
+  font-display: swap;
+  src: local(''),
+       url('SofiaProBold.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('SofiaProBold.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}

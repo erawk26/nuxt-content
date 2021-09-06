@@ -1,3 +1,11 @@
-@import 'variables';
+$serif-stack: '"Georgia", "Times", "Times New Roman", serif';
+$sans-serif-stack: '"Helvetica Neue", "Helvetica", "Arial", sans-serif';
+$lato-font: 'Lato'
+$unica-font: 'Unica One'
+$sofia-font: 'Sofia Pro'
+$raleway-font: 'Raleway'
+$fjalla-font: 'Fjalla One'
+$playfair-font: 'Playfair Display'
 
-@import '~vuetify/src/styles/styles.sass';
+$heading-font-family: $sofia-font, #{$sans-serif-stack};
+$body-font-family: $playfair-font, #{$sans-serif-stack};

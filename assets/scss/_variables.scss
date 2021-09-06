@@ -91,18 +91,21 @@ $br3: 6px;
 
 $serif-stack: '"Georgia", "Times", "Times New Roman", serif';
 $sans-serif-stack: '"Helvetica Neue", "Helvetica", "Arial", sans-serif';
-$lato-font: 'Lato', #{$sans-serif-stack};
-$unica-font: 'Unica One', #{$sans-serif-stack};
-$sofia-font: 'Sofia Pro', #{$sans-serif-stack};
-$playfair-font: 'Playfair Display', #{$serif-stack};
-// $roboto-font: 'Roboto', #{$sans-serif-stack};
-// $monserrat-font: 'Montserrat', #{$sans-serif-stack};
-// $libre-font: 'Libre Baskerville', #{$serif-stack};
+$lato-font: 'Lato';
+$unica-font: 'Unica One';
+$sofia-font: 'Sofia Pro';
+$raleway-font: 'Raleway';
+$fjalla-font: 'Fjalla One';
+$playfair-font: 'Playfair Display';
+$roboto-font: 'Roboto';
+$monserrat-font: 'Montserrat';
+$libre-font: 'Libre Baskerville';
 
 // Base Font
-$heading-font-family: $sofia-font;
+
+$heading-font-family: $sofia-font, #{$sans-serif-stack};
+$body-font-family: $playfair-font, #{$sans-serif-stack};
 $heading-alt-family: $heading-font-family;
-$body-font-family: $playfair-font;
 $base-font-size:1.6rem;
 $base-line-height:1.3;
 $inherit: inherit;
@@ -118,7 +121,7 @@ $fixed-line-height: $base-line-height;
 $fontBody: $body-font-family;
 $fontHead: $heading-font-family;
 $fontHead2: $heading-alt-family;
-$fontIcon: 'FontAwesome';
+$fontIcon: 'Material Design Icons';
 
 // Font Weights //////////
 $light: 300;

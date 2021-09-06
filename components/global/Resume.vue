@@ -104,13 +104,6 @@ export default {
           content: this.meta.desc,
         },
       ],
-      link: [
-        {
-          rel: 'stylesheet',
-          href:
-            'https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans&display=swap',
-        },
-      ],
     }
   },
   transition: 'slide-down',

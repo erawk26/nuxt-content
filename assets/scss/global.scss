@@ -1,7 +1,7 @@
 @import "init";
 @import "utility";
 @import "animations";
-@import "type";
+// @import "type";
 
 //------// Global Styles //------//
 *,
@@ -171,7 +171,7 @@ h6 {
 .v-application {
   .mdi,
   .material-icons {
-    font-family: 'Material Icons';
+    font-family: 'Material Design Icons';
     font-weight: normal;
     font-style: normal;
     font-size: 24px;

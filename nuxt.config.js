@@ -18,14 +18,13 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Lato|Unica+One',
-      },
+      // {
+      //   rel: 'stylesheet',
+      //   href: 'https://fonts.googleapis.com/css?family=Lato|Unica+One',
+      // },
     ],
   },
 
-  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     '@/assets/scss/global.scss',
     path.resolve(
@@ -34,38 +33,35 @@ export default {
     ),
   ],
 
-  // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     '@nuxtjs/google-analytics',
-    // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/style-resources',
+    'nuxt-font-loader',
   ],
 
-  // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [
-    // https://go.nuxtjs.dev/content
-    '@nuxt/content',
-  ],
+  modules: ['@nuxt/content'],
 
-  // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {},
-  // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
+
+  fontLoader: {
+    url: {
+      local: '/fonts/font-face.css',
+      google:
+        'https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans&display=swap',
+      custom:
+        'https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css',
+    },
+  },
   vuetify: {
     customVariables: ['@/assets/scss/vuetify-vars.scss'],
+    treeShake: true,
+    defaultAssets: false,
     icons: {
       iconfont: 'mdi', // default - only for display purposes
-    },
-    treeShake: true,
-    defaultAssets: {
-      font: {
-        family: 'Playfair Display',
-      },
     },
     theme: {
       dark: false,
@@ -108,7 +104,7 @@ export default {
   styleResources: {
     scss: ['@/assets/scss/_init.scss'], // alternative: scss
   },
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
+
   build: {
     transpile: ['gsap'],
     extend: (config) => {
@@ -126,7 +122,6 @@ export default {
         'postcss-import': true,
       },
       preset: {
-        // Change the postcss-preset-env settings
         autoprefixer: {
           grid: true,
         },

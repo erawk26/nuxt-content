@@ -6,7 +6,7 @@ date: '2019-03-01'
 media:
   -
     type: video
-    sources: [minn-by-season.mp4]
+    sources: [minn-by-season--web.mp4]
 skills:
   - Drupal 8
   - CMS Structuring

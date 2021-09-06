@@ -6,7 +6,7 @@ date: '2020-07-01'
 media:
   -
     type: video
-    sources: [exploreMD.mp4]
+    sources: [exploreMD--web.mp4]
 skills:
   - Drupal 8
   - Drupal Custom Route / Controller

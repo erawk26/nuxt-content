@@ -77,9 +77,8 @@ export default {
         .call(this.$refs.video.querySelectorAll('source'))
         .map((x) => x.attributes.src.value)
         .join(', ')
-      this.$refs.video.addEventListener(
-        'canplaythrough',
-        this.onVideoLoad({ sources })
+      this.$refs.video.addEventListener('canplaythrough', (e) =>
+        this.onVideoLoad({ ...e, sources })
       )
     }
     window.addEventListener('resize', this.debounce(this.resize, 120))

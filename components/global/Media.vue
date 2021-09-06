@@ -1,5 +1,6 @@
 <template lang="pug">
   figure.full-width.rel.media(ref="media" :class="type")
+    loading.abs-center(v-if="loading")
     v-img(v-if="type=='img'" @load="e=>onMediaLoad({src:e,type:'image'})" :aspect-ratio="aspectRatio" :alt="alt||title" :title="title||alt" :lazy-src="lazyUrl" :src="src" max-width="100%" max-height="100%" background-position="center")
     .video-wrap.full-width.rel.overflow(v-else ref="video-wrap" :style="{ height:0,paddingBottom: (1 / aspectRatio) * 100 + '%' }" )
       videobg(:type="type" :sources="sources" :yt-id="ytId" :active="active" :img="poster" @loaded="onMediaLoad")
@@ -44,10 +45,6 @@ export default {
   },
   methods: {
     onMediaLoad(data) {
-      // console.log(
-      //   data.type === 'image' ? 'Image Loaded' : 'Playing ' + data.type,
-      //   data
-      // )
       this.loading = false
       this.$emit('loaded', data)
     },

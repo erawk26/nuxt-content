@@ -6,12 +6,14 @@
       icon='mdi-file-pdf-box',
       href='./ErikOlsen_Resume_nuxt.pdf',
       text='View Pdf'
+      aria-label="view my resume as a pdf"
     )
     my-link.ml-2.mb-2(
       :hide-text='true',
       icon='mdi-download',
       href='./ErikOlsen_Resume_nuxt.pdf',
       text='Download',
+      aria-label="download my resume"
       download
     )
   v-divider.my2
@@ -45,13 +47,13 @@
       h3.uc Get in Touch
       .css-grid-2.content
         .row-1.col-left mobile
-        a.row-1.col-right.block.unstyle(:href='resume.mobile.url') {{ resume.mobile.label }}
+        a.row-1.col-right.block.unstyle(aria-label="Call Me" :href='resume.mobile.url') {{ resume.mobile.label }}
         .row-2.col-left email
-        a.row-2.col-right.block.unstyle(:href='resume.email.url') {{ resume.email.label }}
+        a.row-2.col-right.block.unstyle(aria-label="Email Me" :href='resume.email.url') {{ resume.email.label }}
         .row-3.col-left website
-        a.row-3.col-right.block.unstyle(:href='resume.website.url') {{ resume.website.label }}
+        a.row-3.col-right.block.unstyle(aria-label="view my portfolio" :href='resume.website.url') {{ resume.website.label }}
         .row-4.col-left linkedin
-        a.row-4.col-right.block.unstyle(:href='resume.linkedin.url') {{ resume.linkedin.label }}
+        a.row-4.col-right.block.unstyle(aria-label="contact me on LinkedIn" :href='resume.linkedin.url') {{ resume.linkedin.label }}
     .eo-flex.col.a-stretch.col-right.row-1.row-span-3
       h3.uc.my-3
         v-icon(:size='40', :left='true') mdi-history
@@ -82,7 +84,7 @@ export default {
   },
   data() {
     return {
-      meta: { title: '', desc: '' },
+      meta: { title: 'Resume', desc: 'An updated resume for Erik Olsen' },
       page: null,
       resume: this.$store.state.siteInfo.resume,
     }

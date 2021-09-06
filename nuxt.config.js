@@ -97,7 +97,7 @@ export default {
   },
   plugins: [
     { src: '@/plugins/starRating.js', mode: 'client' },
-    { src: '@/plugins/youtube.js', mode: 'client' },
+    // { src: '@/plugins/youtube.js', mode: 'client' },
     '@/plugins/globalMethods.js',
     '@/plugins/directives.js',
   ],

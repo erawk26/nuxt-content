@@ -1,6 +1,6 @@
 <template lang="pug">
   section.VideoBg
-    youtube(v-if="type==='youtube'&&active" ref='video' @loaded="onVideoLoad" :player-vars="ytConfig" :yt-id="ytId" :poster="img||`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`")
+    //- youtube(v-if="type==='youtube'&&active" ref='video' @loaded="onVideoLoad" :player-vars="ytConfig" :yt-id="ytId" :poster="img||`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`")
     video(v-if="type==='video'" ref='video', :muted='muted', autoplay='', playsinline='', loop='')
       source(v-for='source in sources', :src='source', :type='getMediaType(source)')
     .VideoBg__content
@@ -10,7 +10,7 @@
 <script>
 export default {
   components: {
-    youtube: () => import('./Youtube'),
+    // youtube: () => import('./Youtube'),
   },
   props: {
     sources: {

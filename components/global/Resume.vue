@@ -4,14 +4,14 @@
     my-link.ml-2.mb-2(
       :hide-text='true',
       icon='mdi-file-pdf-box',
-      href='./ErikOlsen_Resume_nuxt.pdf',
+      href='/ErikOlsen_Resume_nuxt.pdf',
       text='View Pdf'
       aria-label="view my resume as a pdf"
     )
     my-link.ml-2.mb-2(
       :hide-text='true',
       icon='mdi-download',
-      href='./ErikOlsen_Resume_nuxt.pdf',
+      href='/ErikOlsen_Resume_nuxt.pdf',
       text='Download',
       aria-label="download my resume"
       download

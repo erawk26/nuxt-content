@@ -36,16 +36,17 @@ export default {
   components: true,
 
   buildModules: [
-    '@nuxtjs/eslint-module',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/style-resources',
+    '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
+    '@nuxtjs/style-resources',
     'nuxt-font-loader',
   ],
 
   modules: ['@nuxt/content'],
 
   content: {},
+
   fontLoader: {
     url: {
       local: '/fonts/font-face.css',
@@ -103,31 +104,7 @@ export default {
   styleResources: {
     scss: ['@/assets/scss/_init.scss'], // alternative: scss
   },
-  router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        path: '/resume',
-        components: {
-          default: resolve(__dirname, 'pages/_slug.vue'), // or routes[index].component
-          resume: resolve(__dirname, 'components/Resume.vue'),
-        },
-        chunkNames: {
-          resume: 'components',
-        },
-      })
 
-      routes.push({
-        path: '/contact',
-        components: {
-          default: resolve(__dirname, 'pages/_slug.vue'), // or routes[index].component
-          contact: resolve(__dirname, 'components/Contact.vue'),
-        },
-        chunkNames: {
-          contact: 'components',
-        },
-      })
-    },
-  },
   build: {
     transpile: ['gsap'],
     extend: (config) => {

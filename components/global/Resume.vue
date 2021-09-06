@@ -34,15 +34,15 @@
       )
         .name.py-2.flex-grow-1.all-caps {{ name }}
         vertical-drag-svg.dots-svg
-        //- client-only(placeholder='Loading...')
-        //-   star-rating(
-        //-     :rating='rating',
-        //-     rtl,
-        //-     read-only,
-        //-     :increment='0.25',
-        //-     :star-size='20',
-        //-     :show-rating='false'
-        //-   )
+        client-only(placeholder='Loading...')
+          star-rating(
+            :rating='rating',
+            rtl,
+            read-only,
+            :increment='0.25',
+            :star-size='20',
+            :show-rating='false'
+          )
     .contact-info.pl-4.eo-flex.col.a-stretch.col-left.row-3.row-span-1
       h3.uc Get in Touch
       .css-grid-2.content
